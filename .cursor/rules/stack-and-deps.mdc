@@ -1,0 +1,94 @@
+---
+description: Document backend and frontend tech stack, key dependencies, and version-specific best practices
+alwaysApply: true
+---
+
+# Application Stack and Dependencies
+
+This project is a **Node/Express + MongoDB backend** with a
+**React + Redux Toolkit frontend** (Create React App).
+
+## Backend Stack (`package.json`)
+
+- **Node runtime**: standard Node.js (module type: `module`)
+- **Express**: `express@^4.18.2`
+  - Best practice: use `express.json()` and `express.urlencoded()`
+    for parsing, keep route definitions thin and delegate to controllers.
+- **MongoDB via Mongoose**: `mongoose@^8.1.1`
+  - Best practice: define schemas/models in a dedicated `models` folder,
+    use lean queries for read-heavy paths, and centralize connection
+    handling in `config/db.js`.
+- **Authentication**
+  - `jsonwebtoken@^9.0.2`
+  - `bcryptjs@^2.4.3`
+  - Best practice: never store plain-text passwords, always hash with
+    bcrypt and store only the hash; keep JWT signing and verification
+    in a small utility (`generateToken`) and environment-driven secrets.
+- **HTTP tooling and middleware**
+  - `cookie-parser@^1.4.6`: parse signed/unsigned cookies when needed.
+  - Custom middleware (auth, async handler, error handler) should be
+    used to keep route code minimal.
+- **Environment/config**
+  - `dotenv@^16.4.1`: load configuration from `.env`; avoid hardcoding
+    secrets or environment-specific values in code.
+- **File uploads**
+  - `multer@^1.4.5-lts.1`: handle multipart/form-data; restrict allowed
+    file types and sizes, and never trust client file names.
+- **Dev and tooling**
+  - `nodemon@^3.0.3`: auto-restart server in development.
+  - `concurrently@^8.2.2`: run backend and frontend dev servers with the
+    `dev` script.
+
+## Frontend Stack (`frontend/package.json`)
+
+The frontend is a Create React App (`react-scripts@5.0.1`) project
+using modern React and Redux Toolkit.
+
+- **React core**
+  - `react@^19.2.4`, `react-dom@^19.2.4`
+  - Best practice: prefer function components, hooks (`useState`,
+    `useEffect`, `useMemo`, `useCallback`), and keep side effects in
+    hooks or RTK thunks rather than in render logic.
+- **State management**
+  - `@reduxjs/toolkit@^2.1.0`
+  - `react-redux@^9.1.0`
+  - Best practice: use `createSlice` and `createAsyncThunk`, configure
+    the store in `store.js`, use typed-like selectors and hooks, and
+    keep slice logic colocated with selectors and thunks.
+- **Routing**
+  - `react-router-dom@^6.21.3`
+  - `react-router-bootstrap@^0.26.2`
+  - Best practice: centralize route definitions (e.g. `Routes.js`),
+    use nested routes where appropriate, and avoid pushing routing
+    logic deep into leaf components.
+- **HTTP client**
+  - `axios@^1.6.5`
+  - Best practice: define a shared axios instance or RTK Query base
+    query with interceptors for auth headers and error handling,
+    instead of ad-hoc `axios` calls everywhere.
+- **UI and styling**
+  - `bootstrap@^5.3.2`
+  - `react-bootstrap@^2.9.2`
+  - `react-icons@^4.12.0`
+  - Best practice: keep global theme and Bootstrap overrides in
+    `assets/styles` and use consistent component patterns from
+    `react-bootstrap` rather than mixing many UI paradigms.
+- **Notifications**
+  - `react-toastify@^10.0.4`
+  - Best practice: centralize toast configuration and show user-facing
+    messages from slices or screens rather than deep child components.
+- **Testing and diagnostics**
+  - `@testing-library/*` and `web-vitals@^2.1.4`
+  - Best practice: write tests against behavior (queries by role/text),
+    keep tests colocated with components or in a parallel structure,
+    and use `reportWebVitals` only when needed.
+
+## Stack Usage Guidelines
+
+- Keep backend and frontend responsibilities clearly separated:
+  backend for data and business rules, frontend for UX and view logic.
+- Prefer feature-based organization on top of this stack (features
+  composed of slices, screens, and components) while reusing shared
+  utilities and styles.
+- When upgrading dependencies, update this rule to keep Cursor aware
+  of the current stack and version-specific best practices.

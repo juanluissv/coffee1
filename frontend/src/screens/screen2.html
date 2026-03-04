@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Artisanal Coffee - Ethiopia Yirgacheffe</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --primary: #11d452;
+            --background-light: #f6f8f6;
+            --background-dark: #102216;
+            --accent-warm: #e8ece8;
+            --border-muted: #d1d8d2;
+            --text-slate-900: #0f172a;
+            --text-slate-500: #64748b;
+            --text-slate-600: #475569;
+            --text-slate-100: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-slate-900);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            border-bottom: 1px solid var(--border-muted);
+            background-color: rgba(246, 248, 246, 0.8);
+            backdrop-filter: blur(12px);
+        }
+
+        .header-container {
+            max-width: 80rem;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 2rem;
+            height: 2rem;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-links {
+            display: none;
+            flex: 1;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .action-btn {
+            display: flex;
+            width: 2.5rem;
+            height: 2.5rem;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            background-color: var(--accent-warm);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .action-btn:hover {
+            background-color: rgba(17, 212, 82, 0.2);
+        }
+
+        .main-content {
+            max-width: 80rem;
+            margin: 0 auto;
+            width: 100%;
+            padding: 2rem 1.5rem;
+        }
+
+        .breadcrumbs {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-slate-500);
+        }
+
+        .breadcrumbs a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--primary);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 1024px) {
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .main-image-container {
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            background-color: var(--accent-warm);
+        }
+
+        .main-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .thumbnail {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background-color: var(--accent-warm);
+            cursor: pointer;
+        }
+
+        .thumbnail.active {
+            border: 2px solid var(--primary);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            border-radius: 0.25rem;
+            background-color: rgba(17, 212, 82, 0.1);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+        }
+
+        .product-title {
+            margin: 0.5rem 0 0;
+            font-size: 2.25rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+        }
+
+        .product-price {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .roast-section h3 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-slate-500);
+            margin: 0;
+        }
+
+        .roast-indicator {
+            margin-top: 0.75rem;
+            display: flex;
+            height: 0.5rem;
+            width: 100%;
+            max-width: 20rem;
+            gap: 0.25rem;
+        }
+
+        .roast-bar {
+            flex: 1;
+            border-radius: 9999px;
+            background-color: rgba(17, 212, 82, 0.2);
+        }
+
+        .roast-bar.filled {
+            background-color: var(--primary);
+        }
+
+        .flavor-notes {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .flavor-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .flavor-icon {
+            display: flex;
+            width: 3rem;
+            height: 3rem;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background-color: var(--accent-warm);
+        }
+
+        .flavor-text {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .options-divider {
+            border-top: 1px solid var(--border-muted);
+            border-bottom: 1px solid var(--border-muted);
+            padding: 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .option-label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-slate-500);
+        }
+
+        .btn-group {
+            margin-top: 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .btn-option {
+            border-radius: 0.5rem;
+            border: 2px solid var(--border-muted);
+            background: none;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .btn-option:hover {
+            border-color: rgba(17, 212, 82, 0.5);
+        }
+
+        .btn-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(17, 212, 82, 0.05);
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .purchase-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .purchase-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 0.75rem;
+            border: 2px solid var(--border-muted);
+            padding: 1rem;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .purchase-card:hover {
+            border-color: rgba(17, 212, 82, 0.3);
+        }
+
+        .purchase-card.active {
+            border-color: var(--primary);
+            background-color: rgba(17, 212, 82, 0.05);
+        }
+
+        .card-content {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .radio-circle {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 9999px;
+            border: 2px solid var(--border-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .purchase-card.active .radio-circle {
+            border-color: var(--primary);
+        }
+
+        .radio-dot {
+            width: 0.625rem;
+            height: 0.625rem;
+            border-radius: 9999px;
+            background-color: var(--primary);
+        }
+
+        .purchase-title {
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .purchase-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-slate-500);
+            margin: 0;
+        }
+
+        .purchase-price {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .cart-section {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .quantity-picker {
+            display: flex;
+            align-items: center;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-muted);
+            background-color: var(--accent-warm);
+            padding: 0 0.5rem;
+        }
+
+        .qty-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .qty-btn:hover {
+            color: var(--primary);
+        }
+
+        .qty-value {
+            width: 2rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .add-to-cart-btn {
+            flex: 1;
+            border-radius: 0.5rem;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 700;
+            border: none;
+            padding: 1rem 0;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(17, 212, 82, 0.2);
+            transition: opacity 0.2s;
+        }
+
+        .add-to-cart-btn:hover {
+            opacity: 0.9;
+        }
+
+        .accordions {
+            margin-top: 1rem;
+            border-top: 1px solid var(--border-muted);
+        }
+
+        .accordion-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-muted);
+        }
+
+        .accordion-trigger {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: none;
+            border: none;
+            text-align: left;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .accordion-content {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--text-slate-600);
+        }
+
+        .footer {
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-muted);
+            background-color: rgba(232, 236, 232, 0.3);
+            padding: 3rem 1.5rem;
+        }
+
+        .footer-container {
+            max-width: 80rem;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-link {
+            color: var(--text-slate-500);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            font-size: 0.875rem;
+            color: var(--text-slate-500);
+        }
+
+        /* Dark Mode overrides */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--background-dark);
+                color: var(--text-slate-100);
+            }
+            .header {
+                border-color: #1e293b;
+                background-color: rgba(16, 34, 22, 0.8);
+            }
+            .action-btn, .main-image-container, .thumbnail, .flavor-icon, .quantity-picker, .footer {
+                background-color: #1e293b;
+            }
+            .options-divider, .purchase-card, .accordions, .accordion-item, .footer {
+                border-color: #1e293b;
+            }
+            .accordion-content {
+                color: #94a3b8;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="main-wrapper">
+
+
+
+
+
+
+
+
+
+<main class="main-content">
+
+<div class="product-grid">
+<!-- Product Image Gallery -->
+<div class="gallery-container">
+<div class="main-image-container">
+<img alt="Premium Coffee Bag" class="h-full w-full object-cover" data-alt="Bag of Ethiopia Yirgacheffe coffee beans on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI1hZ4n8aP8K_dl-VhrH-Wx6T1JNKDPqGyjfPpQwGNIYFYzlCowPUEZ5ON1-m1RfqBex8-_0hH5dwV79LlfKPp4fUCh5IVuHQ4qA1uCmh3_bh-7q4XbvTYvZ-BpRMsZKefj7rhopu4qzOI1GEKbaesQbvxnBVs0vR5emoY-8X-zLHxeJuKX0s8u7K6J5upac-SW7S4-0j7SyGRhNjeTJAraSJ1N6pjdWFyA2xgyyVj0B3NB4Up59CJM-FbjnLTomYTqT3qwbtdkgCy"/>
+</div>
+<div class="thumbnail-grid">
+<div class="thumbnail">
+<img alt="Coffee Bag Detail" class="h-full w-full object-cover" data-alt="Close up of artisanal coffee packaging" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrL5IBFrsHLReSccIxD2CLjg0zt0UhzT86smeVwONLGlX7J5iFaTWLXb9U_bEzwTBYczAaB6zz3d5ghJ_8fPlheVZgzy1j0BQmu6kVx8FjMFlBJLlBmSYx7o6WLzNM5N3S3Me956xo4Kn-wE56kaWe3JZJ7LglUPjtVmjFFnfUuSCZdWdB1FPl8IO9VkaZstMURGLo25xY4VwHHF4SkbF5hzcuIN4AZkHBnr4mv5R3kYTSkmN0optSBlZUdzjblSx5POdC5DqCBq78"/>
+</div>
+<div class="thumbnail">
+<img alt="Coffee Beans Detail" class="h-full w-full object-cover" data-alt="Macro shot of roasted coffee beans" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkWoPd2C931HBITMpkBPVztdw5zXzMhkCYbzrY8A1iaZnUhtSr5PW_r7kfY09uKn3zfnMukJ5Hk2_6d5wcQtCGZDzLxor-pIpcJlRIWPK9Spd0OZ5gUOKgAnff2Qb-5kMkZvo6DOgoON4o0AUX0oX7DWr7-fpckl5RXgKZgp0iXfHg5JDAzHM90Fu3NAlaqZOJ7K6RHoIrzkn6yhZxLyBJWPxHBAYnhz7jqom6r86SC8m4FHDSnWlHNgWBKMq-bNWkOrv-tblMFGV6"/>
+</div>
+<div class="thumbnail">
+<img alt="Brewed Coffee" class="h-full w-full object-cover" data-alt="V60 coffee pour over brewing process" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFgA7rGstGpRSPw4vHuX8uahcPBBmsjrO74UWIL7Vi1bPj6In2EqjBySTgtPsUObd_AK2gZ-Mmioh694DKlIBvwknp2J3jRfRLRAJdChM3VHibaLTE1cgfUWPQIA1Lag3aLXu6hNj42T0T-6FKjez2HvZq4dxwIKade7BdXfpoU1z8EapUnupth94mhxcQJJb--KXaFYpSy4rDmnHkOgbeltH_6q2MqBmU1apB8mmPB2raOZs3irpbhKkiBUKrqYu7LPWDWE7qX39Q"/>
+</div>
+</div>
+</div>
+<!-- Product Details Info -->
+<div class="product-info">
+<div>
+<span class="badge">Single Origin</span>
+<h1 class="product-title">Ethiopia Yirgacheffe</h1>
+<p class="product-price">$24.00</p>
+</div>
+<!-- Roast Level -->
+<div class="roast-section">
+<h3 class="text-sm font-bold uppercase text-slate-500">Roast Level: <span class="text-slate-900 dark:text-slate-100">Light-Medium</span></h3>
+<div class="roast-indicator">
+<div class="roast-bar"></div>
+<div class="roast-bar"></div>
+<div class="roast-bar"></div>
+<div class="roast-bar"></div>
+<div class="roast-bar"></div>
+</div>
+</div>
+<!-- Flavor Notes -->
+<div class="flex gap-6 py-2">
+<div class="flex flex-col items-center gap-1">
+<div class="flex size-12 items-center justify-center rounded-full bg-accent-warm dark:bg-slate-800">
+<span class="material-symbols-outlined text-primary">psychology_alt</span>
+</div>
+<span class="text-xs font-medium">Jasmine</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="flex size-12 items-center justify-center rounded-full bg-accent-warm dark:bg-slate-800">
+<span class="material-symbols-outlined text-primary">eco</span>
+</div>
+<span class="text-xs font-medium">Bergamot</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="flex size-12 items-center justify-center rounded-full bg-accent-warm dark:bg-slate-800">
+<span class="material-symbols-outlined text-primary">nutrition</span>
+</div>
+<span class="text-xs font-medium">Blueberry</span>
+</div>
+</div>
+<!-- Selectors -->
+<div class="options-divider">
+<!-- Grind Type -->
+<div>
+<label class="option-label">Grind Type</label>
+<div class="btn-group">
+<button class="btn-option">Whole Bean</button>
+<button class="btn-option">Drip</button>
+<button class="btn-option">Espresso</button>
+</div>
+</div>
+<!-- Size -->
+<div>
+<label class="option-label">Bag Size</label>
+<div class="btn-group">
+<button class="btn-option">12oz</button>
+<button class="btn-option">2lb</button>
+<button class="btn-option">5lb</button>
+</div>
+</div>
+</div>
+<!-- Purchase Options -->
+<div class="purchase-options">
+<div class="purchase-card"><div class="card-content"><div class="radio-circle"></div><div><p class="purchase-title">One-time purchase</p><p class="purchase-subtitle">$24.00 per bag</p></div></div></div>
+<div class="purchase-card"><div class="card-content"><div class="radio-circle"><div class="radio-dot"></div></div><div><p class="purchase-title">Subscribe &amp; Save (15%)</p><p class="purchase-subtitle">Delivered every 4 weeks</p></div></div><span class="purchase-price">$20.40</span></div>
+</div>
+<!-- Add to Cart Section -->
+<div class="cart-section">
+<div class="quantity-picker">
+<button class="qty-btn">-</button>
+<span class="qty-value">1</span>
+<button class="qty-btn">+</button>
+</div>
+<button class="add-to-cart-btn">
+                            Add to Cart
+                        </button>
+</div>
+
+
+<!-- Accordions -->
+<!-- <div class="mt-4 divide-y divide-border-muted dark:divide-slate-800">
+<div class="py-4">
+<button class="flex w-full items-center justify-between text-left">
+<span class="font-bold">Farm Story</span>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+<div class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                                Sourced from the high-altitude Gedeo Zone, this coffee represents the pinnacle of Yirgacheffe washing stations. Smallholder farmers carefully hand-pick cherries at peak ripeness.
+                            </div>
+</div>
+<div class="py-4">
+<button class="flex w-full items-center justify-between text-left">
+<span class="font-bold">Brewing Guide</span>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+<div class="py-4">
+<button class="flex w-full items-center justify-between text-left">
+<span class="font-bold">Shipping &amp; Returns</span>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div> -->
+
+
+
+</div>
+</div>
+</main>
+
+
+<!-- 
+<footer class="footer">
+<div class="footer-container">
+<div class="footer-links">
+<a class="footer-link" href="#">Instagram</a>
+<a class="footer-link" href="#">Facebook</a>
+<a class="footer-link" href="#">Twitter</a>
+</div>
+<p class="copyright">© 2024 Artisanal Coffee Roasters. All rights reserved.</p>
+</div>
+</footer> -->
+
+
+
+</div>
+</body></html>

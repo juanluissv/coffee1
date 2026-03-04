@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
-
+import products from './data/products.js';
 
 dotenv.config()
 
@@ -23,6 +23,16 @@ const __dirname = path.resolve() //set  __dirname to current directory
 // app.get('/', (req, res) => {
 //     res.send("API is running...")
 // })
+
+
+app.get('/api/products', (req, res) => {
+  res.json(products)
+})
+
+app.get('/api/products/:id', (req, res) => {
+  const product = products.find(p => p._id === req.params.id)
+  res.json(product)
+})
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'frontend/build')))

@@ -1,0 +1,34 @@
+[
+	{
+		"id": "ethiopian-yirgacheffe",
+		"title": "Ethiopian Yirgacheffe",
+		"tag": "Light Roast",
+		"notes": "Blueberry & Jasmine",
+		"price": "$18.00",
+		"image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAG7zKvWp38PIMny1Yo12INPGjfyj4llgaibCdHgezqGCL6nucvCZanId_MhJP5MyJF6OKlm0vUXBbGfhjYHDSBvTYgocrtCvSRDWY9rHpr56sWr_6-wn1yFGsh_RZms-nIj3VBFYCcTh6XVixCgSN9M6DFzAyW27PnyS87QR7BAO4c7emwVAnUrK3o6DlWPVQMK3b3lHOhZ-rfdH8UNx6m_yqvvs9PCyUnGijudecyLzYzqzrX1TZs_vsK9rjHjBnfQZVgbzak4ZgP"
+	},
+	{
+		"id": "colombia-supremo",
+		"title": "Colombia Supremo",
+		"tag": "Medium Roast",
+		"notes": "Caramel & Nut",
+		"price": "$16.50",
+		"image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCE7JU-uch7V2jU4htWrPVK5zxB3jwy4kWT5N0hKDE833b1XtPINuTh_GyOk55m18-JhpyYOnSvsN69abrAxJX6e_KHrrJEUXtdVyitmrz58pfSI9lHmRg3ndARVIvOcCfKajKzruLNCMHikTKeZesegpFrYB5T6e1kFOSF3dMNgwXeVvXTfocTzlcIH0EW89TH1SRp5LtOnFMeU_Au7edx5PNiDxTBa_iCH7In5kHj9jPLt2e5MivA-Ozp1MzsqVffh15SgK9CvBbE"
+	},
+	{
+		"id": "sumatra-mandheling",
+		"title": "Sumatra Mandheling",
+		"tag": "Dark Roast",
+		"notes": "Earthy & Herbal",
+		"price": "$17.00",
+		"image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBR8KW5uaDCn97s-7siYQRmX_RKL7Vz6Z3GymDz3yaPK0fSP2-NIeDsZVbpGrR3ZUGs2yHE1SOU8Zur4-WMsDcpkN2epNfK3emktjtRkEJn4r98mVgkBSILAhzpKOeOjqlARSIJWskLC6ZtqghVtbYkSSQfJI5dnGSSqC9G4xwwfllxvBHrEmr6pYNgFYuUEXXkXg_ltKJQzFQw_TWeOyI8bxjCscpb_GZbx4xUsa3oTzFmeJlLdYnanZMHI9tyUg1HtAX6VHaQ60PZ"
+	},
+	{
+		"id": "guatemala-antigua",
+		"title": "Guatemala Antigua",
+		"tag": "Medium-Dark",
+		"notes": "Cocoa & Spice",
+		"price": "$19.00",
+		"image": "https://lh3.googleusercontent.com/aida-public/AB6AXuD3lXBVAeRzY3ervJbowh83HCe57MPJ8GMFWzTz3ClAX_LbAXx_RvgMZK_CSmyuwYZKqXHzw3pzQXiNfrpkujDrIxALhKkzd2VJzjJCkzxMJS8LhLK5Bbk8LFNUzXOVSpFbutq-eKEJODXlhNO6gLya-EAlfJxAs1HgkoHQSZ44BEZftb_5nkImAYgBbEGxY8xpR2Ts622yeQ9PxwbaiqQYgsycIIN0C2qb9_68cdOG6Am1CCszKSEohkZeCpo8WyS8o90ETQR5wsTU"
+	}
+]

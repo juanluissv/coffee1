@@ -1,0 +1,51 @@
+---
+description: Document and enforce project folder structure for frontend and backend
+alwaysApply: true
+---
+
+# Project Folder Structure
+
+This rule documents the intended folder layout for the project so that
+new code fits the existing architecture.
+
+## Backend (Node/Express)
+
+Backend code lives in the root `src` directory:
+
+- `src/server.js`: application entry point and server bootstrap
+- `src/config`: configuration files (env, DB connection, app config)
+- `src/controllers`: request/response orchestration and business logic
+- `src/middleware`: Express middleware (auth, validation, logging, errors)
+- `src/models`: data models and schemas (e.g. MongoDB models)
+- `src/routes`: Express route definitions and route composition
+- `src/utils`: shared helpers and utilities with no framework coupling
+
+**Guidelines**
+
+- New route handlers go in `src/controllers` and are wired in `src/routes`
+- Cross-cutting concerns (auth, validation, logging) belong in `src/middleware`
+- Data access and schemas belong in `src/models`
+- Generic helper logic belongs in `src/utils`
+- Avoid putting business logic directly in `server.js`, routes, or models
+
+## Frontend (React)
+
+The React client lives in `frontend` and uses the default CRA layout:
+
+- `frontend/public`: static HTML shell and public assets
+- `frontend/src`: React components, hooks, Redux logic, and client utilities
+
+**Guidelines**
+
+- Place React UI and page code under `frontend/src`
+- Keep backend-only code out of `frontend` and vice versa
+- When adding new top-level areas (e.g. `frontend/src/features`), keep
+  naming consistent, colocate related components, hooks, and Redux slices,
+  and avoid creating duplicate concepts across folders
+
+## General
+
+- Do not add new top-level folders at the project root without a clear,
+  documented purpose
+- Prefer extending existing folders (e.g. `controllers`, `routes`,
+  `middleware`) over inventing new parallel structures

@@ -1,0 +1,54 @@
+---
+alwaysApply: true
+---
+# Frontend Structure and Patterns
+
+This rule describes how to organize code in `frontend/src` so new
+components, screens, and slices stay consistent.
+
+## Top-level Layout
+
+- `App.js` / `Routes.js`: app shell and route composition only
+- `screens`: page-level containers mapped to routes
+- `components`: reusable presentational and layout components
+- `slices`: Redux Toolkit slices and async thunks
+- `store.js`: Redux store configuration and middleware
+- `utils`: UI-independent helpers and formatting functions
+- `assets`: images, icons, and shared styles
+
+## Screens vs Components
+
+- Screens in `screens` should handle:
+  - wiring Redux selectors and dispatch
+  - data fetching and side effects
+  - composing child components from `components`
+- Components in `components` should be:
+  - mostly presentational and reusable
+  - driven by props, not Redux directly
+
+## Redux Toolkit Slices
+
+- Each domain slice lives in `slices` as one file or folder
+- Use `createSlice` and `createAsyncThunk`
+- Keep selectors colocated with the slice
+- Prefer `isLoading`, `hasError`, and `errorMessage` flags in slice state
+
+Example pattern:
+
+```javascript
+// slices/userSlice.js
+const initialState = {
+	isLoading: false,
+	hasError: false,
+	errorMessage: '',
+	user: null,
+}
+```
+
+## Styling and Assets
+
+- Global styles live in `App.css`, `index.css`, and `assets/styles`
+- Co-locate component-specific styles with the component or under
+  `assets/styles` using clear names
+- Prefer consistent spacing, typography, and color tokens via shared
+  styles or variables

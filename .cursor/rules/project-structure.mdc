@@ -1,0 +1,77 @@
+---
+description: High-level directory map of the project with important source files
+alwaysApply: true
+---
+
+# Project Directory Structure
+
+This rule lists the main source folders and important files so new code
+is added in the right place.
+
+## Root
+
+- `package.json`: root Node/Express app metadata and scripts
+- `public`: static assets served by the backend (if used)
+- `src`: backend Node/Express source code
+- `frontend`: React SPA (client) application
+
+Tooling and build artefacts:
+
+- `node_modules`: installed dependencies (do not edit)
+- `.cursor`: Cursor configuration and rules
+
+## Backend (`src`)
+
+- `src/server.js`: Express app entry point, middleware wiring, and routes
+- `src/config/db.js`: database connection configuration
+- `src/middleware/asyncHandler.js`: async route wrapper
+- `src/middleware/authMiddleware.js`: auth-related middleware
+- `src/middleware/errorMiddleware.js`: error handler middleware
+- `src/utils/generateToken.js`: helper for token generation
+
+When adding new backend features:
+
+- keep route logic in controllers and wire them through routes
+- keep DB-specific logic and schemas in models
+- put cross-cutting concerns (auth, validation, logging) in middleware
+- keep pure helpers in `src/utils`
+
+## Frontend (`frontend`)
+
+- `frontend/package.json`: React app metadata and scripts
+- `frontend/public`: static HTML shell, manifest, icons, and public assets
+- `frontend/src`: React application source
+
+### Frontend `src`
+
+Top-level files:
+
+- `frontend/src/index.js`: React entry point and app bootstrap
+- `frontend/src/App.js`: main app shell and layout
+- `frontend/src/Routes.js`: central route configuration
+- `frontend/src/store.js`: Redux store configuration
+- `frontend/src/constants.js`: shared constants for the client
+- `frontend/src/index.css`, `frontend/src/App.css`: global styles
+- `frontend/src/logo.svg`: app logo asset
+- `frontend/src/reportWebVitals.js`, `frontend/src/setupTests.js`:
+  CRA metrics and test setup
+
+Domain-specific folders:
+
+- `frontend/src/assets/styles`:
+  shared CSS such as `bootstrap.custom.css`, `index.css`
+- `frontend/src/screens`:
+  page-level components (e.g. `HomeScreen.jsx`) mapped to routes
+- `frontend/src/slices`:
+  Redux Toolkit slices (e.g. `apiSlice.js`, `authSlice.js`)
+- `frontend/src/components`:
+  reusable UI components (currently empty or to be populated)
+- `frontend/src/utils`:
+  frontend utilities (currently empty or to be populated)
+
+When adding new frontend features:
+
+- create route-driven pages under `screens`
+- add Redux state and async logic in `slices`
+- build reusable pieces in `components`
+- keep styling consistent by using `assets/styles` and global CSS
